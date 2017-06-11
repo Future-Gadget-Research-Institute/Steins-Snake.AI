@@ -35,3 +35,6 @@ python3 ai.py
 
 
 Inspired by https://github.com/Hawstein/snake-ai
+
+
+El psy congroo.
