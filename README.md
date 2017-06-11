@@ -10,12 +10,19 @@ Written in Python.
 
 - snake_v1.py  ---  normal snake game
 
-- Font: techkr
+- Font: [techkr](http://www.dafont.com/techkr.font)
+
+### Platforms:
+- macOS
+
+- Linux (unknown)
+
+- Windows (unknown)
 
 ### Requires:
-- Python 3.5
+- [Python 3.5](https://www.python.org/downloads/release/python-350/)
 
-- Pygame
+- [Pygame](http://www.pygame.org/download.shtml)
 
 ### How to run:
 ```
