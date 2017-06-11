@@ -27,10 +27,11 @@ python3 ai.py
 <img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/running1.png" width="350">
 <img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/running2.png" width="350">
 
-###### TODO:
+#### TODO:
 
 - [x] Serching based on BFS
 
 - [ ] Alternative searching method: A*
+
 
 Inspired by https://github.com/Hawstein/snake-ai
