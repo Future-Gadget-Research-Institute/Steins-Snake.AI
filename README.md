@@ -5,9 +5,32 @@ An AI for snake game.
 
 Written in Python.
 
+### Includes:
+- ai.py    ---      main program
+
+- snake_v1.py  ---  normal snake game
+
+- Font: techkr
+
+### Requires:
+- Python 3.5
+
+- Pygame
+
+### How to run:
+```
+python3 ai.py
+```
+
 <img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/steins%3Bsnake.png" width="350">
 <img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/running0.png" width="350">
 <img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/running1.png" width="350">
 <img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/running2.png" width="350">
+
+###### TODO:
+
+- [x] Serching based on BFS
+
+- [ ] Alternative searching method: A*
 
 Inspired by https://github.com/Hawstein/snake-ai
