@@ -5,9 +5,9 @@ An AI for snake game.
 
 Written in Python.
 
-![steins;snake](https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/steins%3Bsnake.png)
-![running0](https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/running0.png)
-![running1](https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/running1.png)
-![running2](https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/running2.png)
+<img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/steins%3Bsnake.png" width="350">
+<img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/running0.png" width="350">
+<img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/running1.png" width="350">
+<img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/running2.png" width="350">
 
 Inspired by https://github.com/Hawstein/snake-ai
