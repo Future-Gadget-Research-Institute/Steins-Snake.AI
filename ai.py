@@ -7,7 +7,10 @@ import sys
 HEIGHT = 20
 WIDTH = 20
 
-HEAD = 0
+
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
 
 FOOD = 0
 UNDEF = int(1E3)
@@ -21,12 +24,12 @@ DOWN = WIDTH
 
 board = [0] * HEIGHT * WIDTH                # use one dimensional list to represent 2 dimensional board
 snake = [0] * (HEIGHT * WIDTH+1)
-snake[HEAD] = 1*WIDTH+1
-snake_size = 1
+snake[0] = 1*WIDTH+1
+snake_size = score = 1
 
 vboard = [0] * HEIGHT * WIDTH
 vsnake = [0] * (HEIGHT * WIDTH+1)
-vsnake[HEAD] = 1*WIDTH+1
+vsnake[0] = 1*WIDTH+1
 vsnake_size = 1
 
 food = 3 * WIDTH + 3
@@ -56,9 +59,9 @@ def init_board(_snake, _size, _board):
             _board[i] = SNAKE
     
 
-def calc_food_dist_board(_food,_snake,_board):
+def calc_food_dist_board(_food,_snake,_board):              # BFS
     found = False
-    q = [_food]
+    q = [_food]                                             # not using Queue() because it is slower
     explored = [0] * (WIDTH * HEIGHT)
     while q:
         pos = q.pop(0)
@@ -151,17 +154,18 @@ def gen_food():
 
 
 def r_move(_mv):
-    global snake, board, snake_size
+    global snake, board, snake_size, score
     mv_body(snake, snake_size)
-    snake[HEAD] += _mv
+    snake[0] += _mv
 
-    if snake[HEAD] == food:
-        board[snake[HEAD]] = SNAKE
+    if snake[0] == food:
+        board[snake[0]] = SNAKE
         snake_size += 1
+        score += 1
         if snake_size < HEIGHT * WIDTH:
             gen_food()
     else:
-        board[snake[HEAD]] = SNAKE
+        board[snake[0]] = SNAKE
         board[snake[snake_size]] = UNDEF
 
 
@@ -177,14 +181,14 @@ def v_move():
         calc_food_dist_board(food, vsnake, vboard)
         move = min_mv(vsnake, vboard)
         mv_body(vsnake, vsnake_size)
-        vsnake[HEAD] += move
-        if vsnake[HEAD] == food:
+        vsnake[0] += move
+        if vsnake[0] == food:
             vsnake_size += 1
             init_board(vsnake, vsnake_size, vboard)
             vboard[food] = SNAKE
             eaten = True
         else:
-            vboard[vsnake[HEAD]] = SNAKE
+            vboard[vsnake[0]] = SNAKE
             vboard[vsnake[vsnake_size]] = UNDEF
 
 
@@ -198,15 +202,15 @@ def final_path():
 
 def run():
     while True:
-        screen.fill((0, 0, 0))
-        pygame.draw.rect(screen, (0, 255, 0), (int(food / WIDTH) * 24, int(food % WIDTH) * 24, 24, 24))
+        screen.fill(BLACK)
+        pygame.draw.rect(screen, GREEN, (int(food / WIDTH) * 24, int(food % WIDTH) * 24, 24, 24))
         for i in range(HEIGHT * WIDTH):
             if board[i] == SNAKE:
-                pygame.draw.rect(screen, (255, 255, 255), (int(i / WIDTH) * 24, int(i % WIDTH) * 24, 24, 24))
+                pygame.draw.rect(screen, WHITE, (int(i / WIDTH) * 24, int(i % WIDTH) * 24, 24, 24))
         init_board(snake, snake_size, board)
 
         # main logic:
-        # find the distance from food to the head of the snake
+        # find the distance from food to the 0 of the snake
         # if succeed:   check if the snake can reach its tail
         #               if succeed: go to the food through the minimum move
         #               if not: follow the movement of the tail
@@ -227,14 +231,14 @@ def run():
 
 def start_screen():
     start = True
-    screen.fill((0, 0, 0))
+    screen.fill(BLACK)
     pygame.font.init()
-    menu = pygame.font.Font('techkr/TECHKR__.TTF', 160).render('Steins;Snake', True, (255, 255, 255))
-    ai = pygame.font.Font('techkr/TECHKR__.TTF', 140).render('AI', True, (255, 255, 255))
-    play = pygame.font.Font('techkr/TECHKR__.TTF', 80).render('Play', True, (0, 0, 0))
+    menu = pygame.font.Font('techkr/TECHKR__.TTF', 160).render('Steins;Snake', True, WHITE)
+    ai = pygame.font.Font('techkr/TECHKR__.TTF', 140).render('AI', True, WHITE)
+    play = pygame.font.Font('techkr/TECHKR__.TTF', 80).render('Play', True, BLACK)
     screen.blit(menu, (62, 30))
     screen.blit(ai, (215, 110))
-    play_button = pygame.draw.rect(screen, (255, 255, 255), (187, 300, 100, 50))
+    play_button = pygame.draw.rect(screen, WHITE, (187, 300, 100, 50))
     screen.blit(play, (207, 270))
 
     while start:
@@ -248,11 +252,40 @@ def start_screen():
     pygame.quit()
     sys.exit()
 
+def gg_screen():
+    gg = True
+    screen.fill(BLACK)
+    pygame.font.init()
+    gameOver = pygame.font.Font('techkr/TECHKR__.TTF', 190).render('Game Over', True, WHITE)
+    str_score = pygame.font.Font('techkr/TECHKR__.TTF', 80).render('Score: %s' % score, True, WHITE)
+    exiit = pygame.font.Font('techkr/TECHKR__.TTF', 80).render('Exit', True, BLACK)
+    back = pygame.font.Font('techkr/TECHKR__.TTF',35).render('Back to Menu', True, BLACK)
+    screen.blit(gameOver, (60, 30))
+    screen.blit(str_score, (190, 180))
+    exit_button = pygame.draw.rect(screen, WHITE, (90, 300, 100, 50))
+    back_button = pygame.draw.rect(screen, WHITE, (300, 300, 100, 50))
+    screen.blit(exiit, (114, 270))
+    screen.blit(back, (310, 300))
+
+    while gg:
+        for event in pygame.event.get():
+            if event.type == MOUSEBUTTONDOWN:
+                if back_button.collidepoint(event.pos):
+                    return
+                if exit_button.collidepoint(event.pos):
+                    gg = False
+            if event.type == QUIT:
+                gg = False
+        pygame.display.update()
+    pygame.quit()
+    sys.exit()
+
+
 if __name__ == '__main__':
     pygame.init()
     pygame.display.set_caption("Steins;Snake ~ El psy congroo.")
     screen = pygame.display.set_mode((480, 456))
-    start_screen()
-    run()
-
-
+    while True:
+        start_screen()
+        run()
+        gg_screen()
