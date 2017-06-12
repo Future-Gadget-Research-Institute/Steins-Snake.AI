@@ -22,7 +22,7 @@ Written in Python.
 
 - Windows (unknown)
 
-### Requires:
+### Dependencies:
 - [Python 3.5](https://www.python.org/downloads/release/python-350/)
 
 - [Pygame](http://www.pygame.org/download.shtml)
