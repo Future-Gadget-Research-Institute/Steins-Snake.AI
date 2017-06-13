@@ -21,20 +21,22 @@ RIGHT = 1
 UP = -WIDTH
 DOWN = WIDTH
 
-
-board = [0] * HEIGHT * WIDTH                # use one dimensional list to represent 2 dimensional board
-snake = [0] * (HEIGHT * WIDTH+1)
-snake[0] = 1*WIDTH+1
-snake_size = score = 1
-
-vboard = [0] * HEIGHT * WIDTH
-vsnake = [0] * (HEIGHT * WIDTH+1)
-vsnake[0] = 1*WIDTH+1
-vsnake_size = 1
-
-food = 3 * WIDTH + 3
-
 DIRC_LIST = [LEFT, UP, RIGHT, DOWN]
+
+
+def reset_all():
+    global snake, board, snake_size, vsnake, vboard, vsnake_size, food, score
+    board = [0] * HEIGHT * WIDTH                # use one dimensional list to represent 2 dimensional board
+    snake = [0] * (HEIGHT * WIDTH + 1)
+    snake[0] = 1 * WIDTH + 1
+    snake_size = score = 1
+
+    vboard = [0] * HEIGHT * WIDTH
+    vsnake = [0] * (HEIGHT * WIDTH + 1)
+    vsnake[0] = 1 * WIDTH + 1
+    vsnake_size = 1
+
+    food = 7 * WIDTH + 8
 
 
 def can_move(pos, dirc):
@@ -201,6 +203,7 @@ def final_path():
 
 
 def run():
+    reset_all()
     while True:
         screen.fill(BLACK)
         pygame.draw.rect(screen, GREEN, (int(food / WIDTH) * 24, int(food % WIDTH) * 24, 24, 24))
