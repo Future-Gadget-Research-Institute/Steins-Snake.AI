@@ -3,7 +3,6 @@ from pygame.locals import *
 import random, sys
 
 
-global screen
 screen_width = 480
 screen_height = 480
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -12,7 +11,7 @@ BLACK = (0, 0, 0)
 R, L, U, D = 1, 2, 3, 4
 
 
-def bodyGrows(snake):
+def body_grows(snake):
     new = (0, 0)
     if dirc == R:
         new = (snake[0][0] + 1, snake[0][1])
@@ -62,7 +61,7 @@ def run():
                     dirc = R
                 if event.key == K_LEFT and dirc in (U, D):
                     dirc = L
-        bodyGrows(snake)
+        body_grows(snake)
         screen.fill(BLACK)
         draw_food(screen, food_pos)
         if snake[0] == food_pos:
@@ -121,15 +120,15 @@ def startScreen():
     sys.exit()
 
 
-def ggScreen():
+def gg_screen():
     gg = True
     screen.fill(BLACK)
     pygame.font.init()
-    gameOver = pygame.font.Font('techkr/TECHKR__.TTF', 190).render('Game Over', True, WHITE)
+    game_over = pygame.font.Font('techkr/TECHKR__.TTF', 190).render('Game Over', True, WHITE)
     str_score = pygame.font.Font('techkr/TECHKR__.TTF', 80).render('Score: %s' % score, True, WHITE)
     exiit = pygame.font.Font('techkr/TECHKR__.TTF', 80).render('Exit', True, BLACK)
     back = pygame.font.Font('techkr/TECHKR__.TTF',35).render('Back to Menu', True, BLACK)
-    screen.blit(gameOver, (140, 30))
+    screen.blit(game_over, (140, 30))
     screen.blit(str_score, (260, 180))
     exit_button = pygame.draw.rect(screen, WHITE, (140, 300, 100, 50))
     back_button = pygame.draw.rect(screen, WHITE, (400, 300, 100, 50))
@@ -150,7 +149,6 @@ def ggScreen():
     sys.exit()
 
 
-
 def main():
     pygame.init()
     pygame.display.set_caption("SNAKE")
@@ -158,7 +156,7 @@ def main():
     while True:
         startScreen()
         run()
-        ggScreen()
+        gg_screen()
 
 
 if __name__ == '__main__':
