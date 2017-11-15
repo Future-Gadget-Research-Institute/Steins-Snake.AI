@@ -29,7 +29,7 @@ Written in Python.
 
 ### How to run:
 ```
-python3 ai.py
+python3 snake_ai.py
 ```
 
 <img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/steins%3Bsnake.png" width="350">
