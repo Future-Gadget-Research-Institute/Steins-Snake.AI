@@ -9,7 +9,7 @@ An AI for snake game.
 Written in Python.
 
 ### Includes:
-- ai.py    ---      main program
+- snake_ai.py    ---      main program
 
 - snake_v1.py  ---  normal snake game
 
