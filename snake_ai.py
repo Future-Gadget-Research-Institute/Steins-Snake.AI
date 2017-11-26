@@ -214,12 +214,16 @@ def run():
 
         # main logic:
         # find the distance from food to the 0 of the snake
-        # if succeed:   check if the snake can reach its tail
-        #               if succeed: go to the food through the minimum move
-        #               if not: follow the movement of the tail
+        #
+        # if succeed:   
+        #     check if the snake can reach its tail
+        #     if succeed: go to the food through the minimum move
+        #     if not: follow the movement of the tail
         # if not:
-        #       follow the movement of the tail
-        # if the snake cannot reach either the food or its tail, then move one block randomly and check again
+        #     follow the movement of the tail
+        #
+        # if the snake cannot reach either the food or its tail:
+        #     move one block randomly and check again
 
         best_move = final_path() if calc_food_dist_board(food, snake, board) else follow_tail()
         if best_move is None:
