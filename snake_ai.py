@@ -3,10 +3,8 @@ import pygame
 from pygame.locals import *
 import sys
 
-
 HEIGHT = 20
 WIDTH = 20
-
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -26,7 +24,7 @@ DIRC_LIST = [LEFT, UP, RIGHT, DOWN]
 
 def reset_all():
     global snake, board, snake_size, vsnake, vboard, vsnake_size, food, score
-    board = [0] * HEIGHT * WIDTH                # use one dimensional list to represent 2 dimensional board
+    board = [0] * HEIGHT * WIDTH  # use one dimensional list to represent 2 dimensional board
     snake = [0] * (HEIGHT * WIDTH + 1)
     snake[0] = 1 * WIDTH + 1
     snake_size = score = 1
@@ -59,11 +57,11 @@ def init_board(_snake, _size, _board):
             _board[i] = UNDEF
         else:
             _board[i] = SNAKE
-    
 
-def calc_food_dist_board(_food,_snake,_board):              # BFS
+
+def calc_food_dist_board(_food, _snake, _board):  # BFS
     found = False
-    q = [_food]                                             # not using Queue() because it is slower
+    q = [_food]  # not using Queue() because it is slower
     explored = [0] * (WIDTH * HEIGHT)
     while q:
         pos = q.pop(0)
@@ -259,6 +257,7 @@ def start_screen():
     pygame.quit()
     sys.exit()
 
+
 def gg_screen():
     gg = True
     screen.fill(BLACK)
@@ -266,7 +265,7 @@ def gg_screen():
     gameOver = pygame.font.Font("techkr/TECHKR__.TTF", 190).render('Game Over', True, WHITE)
     str_score = pygame.font.Font("techkr/TECHKR__.TTF", 80).render('Score: %s' % score, True, WHITE)
     exiit = pygame.font.Font("techkr/TECHKR__.TTF", 80).render('Exit', True, BLACK)
-    back = pygame.font.Font("techkr/TECHKR__.TTF",35).render('Back to Menu', True, BLACK)
+    back = pygame.font.Font("techkr/TECHKR__.TTF", 35).render('Back to Menu', True, BLACK)
     screen.blit(gameOver, (60, 30))
     screen.blit(str_score, (190, 180))
     exit_button = pygame.draw.rect(screen, WHITE, (90, 300, 100, 50))
