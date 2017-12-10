@@ -3,8 +3,8 @@ import pygame
 from pygame.locals import *
 import sys
 
-import os
-os.environ["SDL_VIDEODRIVER"] = "dummy"
+# import os
+# os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 HEIGHT = 20
 WIDTH = 20
