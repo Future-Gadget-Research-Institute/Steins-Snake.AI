@@ -26,16 +26,16 @@ DIRC_LIST = [LEFT, UP, RIGHT, DOWN]
 
 
 def reset_all():
-    global snake, board, snake_size, vsnake, vboard, vsnake_size, food, score
+    global snake, board, snake_size, _snake, _board, _snake_size, food, score
     board = [0] * HEIGHT * WIDTH  # use one dimensional list to represent 2 dimensional board
     snake = [0] * (HEIGHT * WIDTH + 1)
     snake[0] = 1 * WIDTH + 1
     snake_size = score = 1
 
-    vboard = [0] * HEIGHT * WIDTH
-    vsnake = [0] * (HEIGHT * WIDTH + 1)
-    vsnake[0] = 1 * WIDTH + 1
-    vsnake_size = 1
+    _board = [0] * HEIGHT * WIDTH
+    _snake = [0] * (HEIGHT * WIDTH + 1)
+    _snake[0] = 1 * WIDTH + 1
+    _snake_size = 1
 
     food = 7 * WIDTH + 8
 
@@ -52,19 +52,19 @@ def can_move(pos, dirc):
     return False
 
 
-def init_board(_snake, _size, _board):
+def init_board(__snake, __size, __board):
     for i in range(HEIGHT * WIDTH):
         if i == food:
-            _board[i] = FOOD
-        elif not (i in _snake[:_size]):
-            _board[i] = UNDEF
+            __board[i] = FOOD
+        elif not (i in __snake[:__size]):
+            __board[i] = UNDEF
         else:
-            _board[i] = SNAKE
+            __board[i] = SNAKE
 
 
-def calc_food_dist_board(_food, _snake, _board):  # BFS
+def calc_food_dist_board(__food, __snake, __board):  # BFS
     found = False
-    q = [_food]  # not using Queue() because it is slower
+    q = [__food]  # not using Queue() because it is slower
     explored = [0] * (WIDTH * HEIGHT)
     while q:
         pos = q.pop(0)
@@ -73,59 +73,59 @@ def calc_food_dist_board(_food, _snake, _board):  # BFS
         explored[pos] = 1
         for dirc in DIRC_LIST:
             if can_move(pos, dirc):
-                if pos + dirc == _snake[0]:
+                if pos + dirc == __snake[0]:
                     found = True
-                if _board[pos + dirc] < SNAKE:
-                    if _board[pos + dirc] > _board[pos] + 1:
-                        _board[pos + dirc] = _board[pos] + 1
+                if __board[pos + dirc] < SNAKE:
+                    if __board[pos + dirc] > __board[pos] + 1:
+                        __board[pos + dirc] = __board[pos] + 1
                     if explored[pos + dirc] == 0:
                         q.append(pos + dirc)
 
     return found
 
 
-def min_mv(_snake, _board):
+def min_mv(__snake, __board):
     mini = SNAKE
     mv = None
     for dirc in DIRC_LIST:
-        if can_move(_snake[0], dirc) and _board[_snake[0] + dirc] < mini:
-            mini = _board[_snake[0] + dirc]
+        if can_move(__snake[0], dirc) and __board[__snake[0] + dirc] < mini:
+            mini = __board[__snake[0] + dirc]
             mv = dirc
     return mv
 
 
-def max_mv(_snake, _board):
+def max_mv(__snake, __board):
     maxi = -1
     mv = None
     for dirc in DIRC_LIST:
-        if can_move(_snake[0], dirc) and UNDEF > _board[_snake[0] + dirc] > maxi:
-            maxi = _board[_snake[0] + dirc]
+        if can_move(__snake[0], dirc) and UNDEF > __board[__snake[0] + dirc] > maxi:
+            maxi = __board[__snake[0] + dirc]
             mv = dirc
     return mv
 
 
 def tail_available():
-    global vsnake_size, vsnake, vboard, food
-    vboard[vsnake[vsnake_size - 1]] = FOOD
-    vboard[food] = SNAKE
-    available = calc_food_dist_board(vsnake[vsnake_size - 1], vsnake, vboard)
+    global _snake_size, _snake, _board, food
+    _board[_snake[_snake_size - 1]] = FOOD
+    _board[food] = SNAKE
+    available = calc_food_dist_board(_snake[_snake_size - 1], _snake, _board)
     for dirc in DIRC_LIST:
-        if can_move(vsnake[0], dirc) and vsnake[vsnake_size - 1] == vsnake[0] + dirc and vsnake_size > 3:
+        if can_move(_snake[0], dirc) and _snake[_snake_size - 1] == _snake[0] + dirc and _snake_size > 3:
             available = False
     return available
 
 
 def follow_tail():
-    global vboard, vsnake, food, vsnake_size
-    vsnake_size = snake_size
-    vsnake = snake[:]
-    init_board(vsnake, vsnake_size, vboard)
-    vboard[vsnake[vsnake_size - 1]] = FOOD
-    vboard[food] = SNAKE
-    calc_food_dist_board(vsnake[vsnake_size - 1], vsnake, vboard)
-    vboard[vsnake[vsnake_size - 1]] = SNAKE
+    global _board, _snake, food, _snake_size
+    _snake_size = snake_size
+    _snake = snake[:]
+    init_board(_snake, _snake_size, _board)
+    _board[_snake[_snake_size - 1]] = FOOD
+    _board[food] = SNAKE
+    calc_food_dist_board(_snake[_snake_size - 1], _snake, _board)
+    _board[_snake[_snake_size - 1]] = SNAKE
 
-    return max_mv(vsnake, vboard)
+    return max_mv(_snake, _board)
 
 
 def last_op():
@@ -141,9 +141,9 @@ def last_op():
     return mv
 
 
-def mv_body(_snake, _snake_size):
-    for i in range(_snake_size, 0, -1):
-        _snake[i] = _snake[i - 1]
+def mv_body(__snake, __snake_size):
+    for i in range(__snake_size, 0, -1):
+        __snake[i] = __snake[i - 1]
 
 
 def gen_food():
@@ -156,10 +156,10 @@ def gen_food():
         a = not (food in snake[:snake_size])
 
 
-def r_move(_mv):
+def r_move(__mv):
     global snake, board, snake_size, score
     mv_body(snake, snake_size)
-    snake[0] += _mv
+    snake[0] += __mv
 
     if snake[0] == food:
         board[snake[0]] = SNAKE
@@ -173,26 +173,26 @@ def r_move(_mv):
 
 
 def v_move():
-    global snake, board, snake_size, vsnake, vboard, vsnake_size, food
-    vsnake_size = snake_size
-    vsnake = snake[:]
-    vboard = board[:]
-    init_board(vsnake, vsnake_size, vboard)
+    global snake, board, snake_size, _snake, _board, _snake_size, food
+    _snake_size = snake_size
+    _snake = snake[:]
+    _board = board[:]
+    init_board(_snake, _snake_size, _board)
 
     eaten = False
     while not eaten:
-        calc_food_dist_board(food, vsnake, vboard)
-        move = min_mv(vsnake, vboard)
-        mv_body(vsnake, vsnake_size)
-        vsnake[0] += move
-        if vsnake[0] == food:
-            vsnake_size += 1
-            init_board(vsnake, vsnake_size, vboard)
-            vboard[food] = SNAKE
+        calc_food_dist_board(food, _snake, _board)
+        move = min_mv(_snake, _board)
+        mv_body(_snake, _snake_size)
+        _snake[0] += move
+        if _snake[0] == food:
+            _snake_size += 1
+            init_board(_snake, _snake_size, _board)
+            _board[food] = SNAKE
             eaten = True
         else:
-            vboard[vsnake[0]] = SNAKE
-            vboard[vsnake[vsnake_size]] = UNDEF
+            _board[_snake[0]] = SNAKE
+            _board[_snake[_snake_size]] = UNDEF
 
 
 def final_path():
