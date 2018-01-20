@@ -98,7 +98,7 @@ def draw_score(screen, snake):
     screen.blit(s, (550, 10))
 
 
-def startScreen():
+def start_screen():
     start = True
     screen.fill(BLACK)
     pygame.font.init()
