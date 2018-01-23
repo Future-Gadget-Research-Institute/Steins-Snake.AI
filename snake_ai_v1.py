@@ -38,18 +38,6 @@ def reset_all():
     food = 7 * WIDTH + 8
 
 
-def can_move(pos, dirc):
-    if dirc == UP and pos / WIDTH > 1:
-        return True
-    elif dirc == LEFT and pos % WIDTH > 1:
-        return True
-    elif dirc == DOWN and pos / WIDTH < HEIGHT - 2:
-        return True
-    elif dirc == RIGHT and pos % WIDTH < WIDTH - 2:
-        return True
-    return False
-
-
 def init_board(__snake, __size, __board):
     for i in range(HEIGHT * WIDTH):
         if i == food:
@@ -58,6 +46,18 @@ def init_board(__snake, __size, __board):
             __board[i] = UNDEF
         else:
             __board[i] = SNAKE
+
+
+def can_move(pos, dirc):
+    if dirc == UP and pos / WIDTH > 0:
+        return True
+    elif dirc == LEFT and pos % WIDTH > 0:
+        return True
+    elif dirc == DOWN and pos / WIDTH < HEIGHT - 1:
+        return True
+    elif dirc == RIGHT and pos % WIDTH < WIDTH - 1:
+        return True
+    return False
 
 
 def find_food_path_bfs(__food, __snake, __board):
@@ -80,50 +80,6 @@ def find_food_path_bfs(__food, __snake, __board):
                         q.append(pos + dirc)
 
     return found
-
-
-def min_mv(__snake, __board):
-    mini = SNAKE
-    mv = None
-    for dirc in DIRC_LIST:
-        if can_move(__snake[0], dirc) and __board[__snake[0] + dirc] < mini:
-            mini = __board[__snake[0] + dirc]
-            mv = dirc
-    return mv
-
-
-def max_mv(__snake, __board):
-    maxi = -1
-    mv = None
-    for dirc in DIRC_LIST:
-        if can_move(__snake[0], dirc) and UNDEF > __board[__snake[0] + dirc] > maxi:
-            maxi = __board[__snake[0] + dirc]
-            mv = dirc
-    return mv
-
-
-def tail_available():
-    global _snake_size, _snake, _board, food
-    _board[_snake[_snake_size - 1]] = FOOD
-    _board[food] = SNAKE
-    available = find_food_path_bfs(_snake[_snake_size - 1], _snake, _board)
-    for dirc in DIRC_LIST:
-        if can_move(_snake[0], dirc) and _snake[_snake_size - 1] == _snake[0] + dirc and _snake_size > 3:
-            available = False
-    return available
-
-
-def follow_tail():
-    global _board, _snake, food, _snake_size
-    _snake_size = snake_size
-    _snake = snake[:]
-    init_board(_snake, _snake_size, _board)
-    _board[_snake[_snake_size - 1]] = FOOD
-    _board[food] = SNAKE
-    find_food_path_bfs(_snake[_snake_size - 1], _snake, _board)
-    _board[_snake[_snake_size - 1]] = SNAKE
-
-    return max_mv(_snake, _board)
 
 
 def last_op():
@@ -199,6 +155,50 @@ def final_path():
     if tail_available():
         return min_mv(snake, board)
     return follow_tail()
+
+
+def tail_available():
+    global _snake_size, _snake, _board, food
+    _board[_snake[_snake_size - 1]] = FOOD
+    _board[food] = SNAKE
+    available = find_food_path_bfs(_snake[_snake_size - 1], _snake, _board)
+    for dirc in DIRC_LIST:
+        if can_move(_snake[0], dirc) and _snake[_snake_size - 1] == _snake[0] + dirc and _snake_size > 3:
+            available = False
+    return available
+
+
+def min_mv(__snake, __board):
+    mini = SNAKE
+    mv = None
+    for dirc in DIRC_LIST:
+        if can_move(__snake[0], dirc) and __board[__snake[0] + dirc] < mini:
+            mini = __board[__snake[0] + dirc]
+            mv = dirc
+    return mv
+
+
+def follow_tail():
+    global _board, _snake, food, _snake_size
+    _snake_size = snake_size
+    _snake = snake[:]
+    init_board(_snake, _snake_size, _board)
+    _board[_snake[_snake_size - 1]] = FOOD
+    _board[food] = SNAKE
+    find_food_path_bfs(_snake[_snake_size - 1], _snake, _board)
+    _board[_snake[_snake_size - 1]] = SNAKE
+
+    return max_mv(_snake, _board)
+
+
+def max_mv(__snake, __board):
+    maxi = -1
+    mv = None
+    for dirc in DIRC_LIST:
+        if can_move(__snake[0], dirc) and UNDEF > __board[__snake[0] + dirc] > maxi:
+            maxi = __board[__snake[0] + dirc]
+            mv = dirc
+    return mv
 
 
 def run():
@@ -295,7 +295,7 @@ def gg_screen():
 if __name__ == '__main__':
     pygame.init()
     pygame.display.set_caption("Steins;Snake ~ El psy congroo.")
-    screen = pygame.display.set_mode((480, 456))
+    screen = pygame.display.set_mode((480, 480))
     while True:
         start_screen()
         run()
