@@ -1,4 +1,4 @@
-# steins-snake.ai 🐍
+# steins_snake.ai 🐍
 
 ### All of this is the selection of Steins; Snake! 
 
