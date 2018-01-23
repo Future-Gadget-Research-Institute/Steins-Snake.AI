@@ -21,7 +21,7 @@ Written in Python.
 - Windows (unknown)
 
 ### Dependencies:
-- [Python 2.7.x](https://www.python.org/downloads/)(for now)
+- [Python 2.7.x](https://www.python.org/downloads/) (for now)
 
 - [Pygame](http://www.pygame.org/download.shtml)
 
