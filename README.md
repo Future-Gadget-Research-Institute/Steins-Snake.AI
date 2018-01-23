@@ -1,7 +1,5 @@
 # steins-snake.ai 🐍
 
-![Active](https://img.shields.io/badge/status-active-brightgreen.svg)   [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e2114955c9064c0daf2ea2a153f09cdc)](https://www.codacy.com/app/oblivion1221/Steins-Snake.AI?utm_source=github.com&utm_medium=referral&utm_content=Oblivion1221/Steins-Snake.AI&utm_campaign=badger)
-
 ### All of this is the selection of Steins; Snake! 
 
 An AI for snake game. 
