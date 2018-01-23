@@ -1,8 +1,0 @@
-language: python
-python:
-  - 3.5
-install:
-  - pip install pygame
-script:
-  - python snake_ai.py
-  - python snake_v1.py
