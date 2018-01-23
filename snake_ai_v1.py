@@ -60,7 +60,7 @@ def init_board(__snake, __size, __board):
             __board[i] = SNAKE
 
 
-def calc_food_dist_board(__food, __snake, __board):  # BFS
+def find_food_path_bfs(__food, __snake, __board):
     found = False
     q = [__food]  # not using Queue() because it is slower
     explored = [0] * (WIDTH * HEIGHT)
@@ -106,7 +106,7 @@ def tail_available():
     global _snake_size, _snake, _board, food
     _board[_snake[_snake_size - 1]] = FOOD
     _board[food] = SNAKE
-    available = calc_food_dist_board(_snake[_snake_size - 1], _snake, _board)
+    available = find_food_path_bfs(_snake[_snake_size - 1], _snake, _board)
     for dirc in DIRC_LIST:
         if can_move(_snake[0], dirc) and _snake[_snake_size - 1] == _snake[0] + dirc and _snake_size > 3:
             available = False
@@ -120,7 +120,7 @@ def follow_tail():
     init_board(_snake, _snake_size, _board)
     _board[_snake[_snake_size - 1]] = FOOD
     _board[food] = SNAKE
-    calc_food_dist_board(_snake[_snake_size - 1], _snake, _board)
+    find_food_path_bfs(_snake[_snake_size - 1], _snake, _board)
     _board[_snake[_snake_size - 1]] = SNAKE
 
     return max_mv(_snake, _board)
@@ -129,7 +129,7 @@ def follow_tail():
 def last_op():
     global snake_size, board, snake, food
     init_board(snake, snake_size, board)
-    calc_food_dist_board(food, snake, board)
+    find_food_path_bfs(food, snake, board)
     mini = SNAKE
     mv = None
     for dirc in DIRC_LIST:
@@ -179,7 +179,7 @@ def v_move():
 
     eaten = False
     while not eaten:
-        calc_food_dist_board(food, _snake, _board)
+        find_food_path_bfs(food, _snake, _board)
         move = min_mv(_snake, _board)
         mv_body(_snake, _snake_size)
         _snake[0] += move
@@ -228,7 +228,7 @@ def run():
         # if the snake cannot reach either the food or its tail:
         #     move one block randomly and check again
 
-        best_move = final_path() if calc_food_dist_board(food, snake, board) else follow_tail()
+        best_move = final_path() if find_food_path_bfs(food, snake, board) else follow_tail()
         if best_move is None:
             best_move = last_op()
         if best_move is not None:
