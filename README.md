@@ -49,6 +49,8 @@ python3 snake_ai.py
 
 - [ ] Alternative searching method: A*
 
+- [ ] New GUI
+
 
 Inspired by https://github.com/Hawstein/snake-ai
 
