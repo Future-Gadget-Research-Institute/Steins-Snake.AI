@@ -3,8 +3,6 @@ import pygame
 from pygame.locals import *
 import sys
 
-# import os
-# os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 HEIGHT = 20
 WIDTH = 20
@@ -206,6 +204,10 @@ def final_path():
 def run():
     reset_all()
     while True:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
         screen.fill(BLACK)
         pygame.draw.rect(screen, GREEN, (int(food / WIDTH) * 24, int(food % WIDTH) * 24, 24, 24))
         for i in range(HEIGHT * WIDTH):
@@ -216,7 +218,7 @@ def run():
         # main logic:
         # find the distance from food to the 0 of the snake
         #
-        # if succeed:   
+        # if succeed:
         #     check if the snake can reach its tail
         #     if succeed: go to the food through the minimum move
         #     if not: follow the movement of the tail
@@ -265,15 +267,15 @@ def gg_screen():
     gg = True
     screen.fill(BLACK)
     pygame.font.init()
-    gameOver = pygame.font.Font("./techkr/TECHKR__.TTF", 190).render('Game Over', True, WHITE)
+    game_over = pygame.font.Font("./techkr/TECHKR__.TTF", 190).render('Game Over', True, WHITE)
     str_score = pygame.font.Font("./techkr/TECHKR__.TTF", 80).render('Score: %s' % score, True, WHITE)
-    exiit = pygame.font.Font("./techkr/TECHKR__.TTF", 80).render('Exit', True, BLACK)
+    term = pygame.font.Font("./techkr/TECHKR__.TTF", 80).render('Exit', True, BLACK)
     back = pygame.font.Font("./techkr/TECHKR__.TTF", 35).render('Back to Menu', True, BLACK)
-    screen.blit(gameOver, (60, 30))
+    screen.blit(game_over, (60, 30))
     screen.blit(str_score, (190, 180))
     exit_button = pygame.draw.rect(screen, WHITE, (90, 300, 100, 50))
     back_button = pygame.draw.rect(screen, WHITE, (300, 300, 100, 50))
-    screen.blit(exiit, (114, 270))
+    screen.blit(term, (114, 270))
     screen.blit(back, (310, 300))
 
     while gg:
