@@ -7,7 +7,7 @@ An AI for snake game.
 Written in Python.
 
 ### Includes:
-- snake_ai.py    ---      main program
+- snake_ai_v1.py    ---      main program
 
 - snake_v1.py  ---  normal snake game
 
@@ -16,26 +16,22 @@ Written in Python.
 ### Platforms:
 - macOS
 
-- Linux (unknown)
+- Linux
 
 - Windows (unknown)
 
 ### Dependencies:
-- [Python 3.5](https://www.python.org/downloads/release/python-350/)
+- [Python 2.7.x](https://www.python.org/downloads/)(for now)
 
 - [Pygame](http://www.pygame.org/download.shtml)
 
 ### How to run:
 ```
-python3 snake_ai.py
+python snake_ai_v1.py
 ```
 
-<img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/steins%3Bsnake.png" width="350">
-<img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/running0.png" width="350">
-<img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/running1.png" width="350">
-<img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/running2.png" width="350">
-<img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/running3.png" width="350">
-<img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/high_score.png" width="350">
+<img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/start.gif" width="350">
+<img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/gg.png" width="350">
 
 #### TODO:
 

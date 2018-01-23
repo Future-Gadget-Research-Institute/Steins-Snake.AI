@@ -237,6 +237,7 @@ def run():
             break
 
         pygame.display.update()
+        pygame.time.Clock().tick(20)
 
 
 def start_screen():
