@@ -36,19 +36,13 @@ python snake_ai_v1.py
 #### TODO:
 
 - [x] Start screen
-
 - [x] End screen
-
 - [x] Super high score
-
 - [x] Serching based on BFS
-
 - [ ] Alternative searching method: A*
-
 - [ ] New GUI
 
 
-Inspired by https://github.com/Hawstein/snake-ai
+#### Credits
 
-
-El psy congroo.
+https://github.com/Hawstein/snake-ai
