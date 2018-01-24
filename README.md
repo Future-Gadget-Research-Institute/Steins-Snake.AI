@@ -48,6 +48,6 @@ python snake_ai_v1.py
 - [ ] New GUI
 
 
-### Credits
+### Credits:
 
 https://github.com/Hawstein/snake-ai
