@@ -33,16 +33,21 @@ python snake_ai_v1.py
 <img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/start.gif" width="350">
 <img src="https://github.com/Oblivion1221/Steins-Snake.AI/blob/master/images/gg.png" width="350">
 
-#### TODO:
+### TODO:
 
 - [x] Start screen
+
 - [x] End screen
+
 - [x] Super high score
+
 - [x] Serching based on BFS
+
 - [ ] Alternative searching method: A*
+
 - [ ] New GUI
 
 
-#### Credits
+### Credits
 
 https://github.com/Hawstein/snake-ai
