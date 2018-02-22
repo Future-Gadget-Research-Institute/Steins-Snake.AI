@@ -1,7 +1,7 @@
+import random
+import sys
 import pygame
 from pygame.locals import *
-import random, sys
-
 
 screen_width = 480
 screen_height = 480
@@ -126,13 +126,13 @@ def gg_screen():
     pygame.font.init()
     game_over = pygame.font.Font('techkr/TECHKR__.TTF', 190).render('Game Over', True, WHITE)
     str_score = pygame.font.Font('techkr/TECHKR__.TTF', 80).render('Score: %s' % score, True, WHITE)
-    exiit = pygame.font.Font('techkr/TECHKR__.TTF', 80).render('Exit', True, BLACK)
+    exit_word = pygame.font.Font('techkr/TECHKR__.TTF', 80).render('Exit', True, BLACK)
     back = pygame.font.Font('techkr/TECHKR__.TTF',35).render('Back to Menu', True, BLACK)
     screen.blit(game_over, (140, 30))
     screen.blit(str_score, (260, 180))
     exit_button = pygame.draw.rect(screen, WHITE, (140, 300, 100, 50))
     back_button = pygame.draw.rect(screen, WHITE, (400, 300, 100, 50))
-    screen.blit(exiit, (163, 270))
+    screen.blit(exit_word, (163, 270))
     screen.blit(back, (410, 300))
 
     while gg:
@@ -149,15 +149,11 @@ def gg_screen():
     sys.exit()
 
 
-def main():
+if __name__ == '__main__':
     pygame.init()
     pygame.display.set_caption("SNAKE")
-
+    screen = pygame.display.set_mode((640, 480))
     while True:
-        startScreen()
+        start_screen()
         run()
         gg_screen()
-
-
-if __name__ == '__main__':
-    main()
